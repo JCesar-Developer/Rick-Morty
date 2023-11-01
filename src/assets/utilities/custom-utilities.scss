@@ -1,0 +1,56 @@
+//display
+.vh-min-100 {
+  min-height: 100vh !important;
+}
+.pointer {
+  cursor: pointer !important;
+}
+
+//position
+.center {
+	display: flex;
+	flex-direction: column;
+  align-items: center;
+}
+
+//typography
+.italic {
+  font-style: italic !important;
+}
+.light {
+  font-weight: lighter !important;
+}
+.normal {
+  font-weight: normal !important;
+}
+.bold {
+  font-weight: bold !important;
+}
+.bolder {
+  font-weight: 1000 !important;
+}
+.uppercase {
+  text-transform: uppercase !important;
+}
+.underline {
+  text-decoration: underline !important;
+}
+.hover-bold {
+  &:hover { font-weight: bold !important;}
+}
+.hover-underline {
+  &:hover { text-decoration: underline !important;}
+}
+
+//custom-utilities
+.thin-container {
+	width: 992px;
+
+  @media (max-width: 992px) {
+    width: 100%;
+    padding: 0 3rem !important;
+  }
+  @media (max-width: 768px) {
+    padding: 0 1rem !important;
+  }
+}

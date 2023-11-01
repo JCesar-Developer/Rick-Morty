@@ -1,0 +1,15 @@
+@import '../styles/colors.scss';
+
+.bg-900 { background-color: $bg-900 !important; }
+.bg-700 { background-color: $bg-700 !important; }
+.bg-500 { background-color: $bg-500 !important; }
+.bg-300 { background-color: $bg-300 !important; }
+.bg-100 { background-color: $bg-100 !important; }
+.bg-50 { background-color:  $bg-50 !important; }
+
+.t-white { color: $t-white !important; }
+.t-gray { color: $t-gray !important;}
+
+.g-500 { background-color: $g-500 !important; }
+.g-300 { background-color: $g-300 !important; }
+.g-100 { background-color: $g-100 !important; }
