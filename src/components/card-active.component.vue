@@ -20,7 +20,7 @@
             <p class="paragraph-2">Origen: {{ character.origin.name }}</p>
             <p class="paragraph-2">Localización: {{ character.location.name }}</p>
             <p class="paragraph-2">Creado: {{ character.created }}</p>
-            <p class="paragraph-2" v-for="episode in character.episode">{{ episode }}</p>
+            <p class="paragraph-2" v-for="(episode, index) in character.episode" :key="index">{{ episode }}</p>
           </div>
 
         </div>
