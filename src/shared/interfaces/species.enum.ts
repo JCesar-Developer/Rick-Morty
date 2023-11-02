@@ -1,6 +1,6 @@
 enum Species {
-  Alien = "Alien",
-  Human = "Human",
+  ALIEN = "Alien",
+  HUMAN = "Human",
 }
 
 export default Species;

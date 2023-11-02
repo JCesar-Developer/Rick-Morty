@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { watch } from 'vue';
-import type { ICharacter } from '@/interfaces/character.interface';
+import type { ICharacter } from '@/models/character.interface';
 
 const props = defineProps({
   character: { type: Object as () => ICharacter, required: true },

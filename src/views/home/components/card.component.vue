@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import CardActive from './card-active.component.vue'
-import type { ICharacter } from '@/interfaces/character.interface';
+import type { ICharacter } from '@/models/character.interface';
 
 defineProps({
   character: { type: Object as () => ICharacter, required: true }

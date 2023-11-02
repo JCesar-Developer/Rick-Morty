@@ -1,3 +1,4 @@
+//Documentation: https://rickandmortyapi.com/
 
 export const base_url = 'https://rickandmortyapi.com/api';
 export enum Endpoints {
