@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref} from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
   enum AlertPosition {
     TOP = 'top',
@@ -20,12 +20,20 @@ import { ref} from 'vue';
     BOTTOM = 'bottom',
   }
 
+  //const props = defineProps({
+  //  class: { type: String, default: 'bg-warning text-white', required: false },
+  //  message: { type: String, default: 'This is an alert component', required: true },
+  //  position: { type: String as () => AlertPosition, default: AlertPosition.TOP_RIGHT, required: false },
+  //  show: Boolean,
+  //});
+
   const $alertComponent = ref<HTMLElement | null>(null);
 
   const newClass = ref<string>('bg-warning text-white');
   const message = ref<string>('This is an alert component');
   const position = ref<AlertPosition>(AlertPosition.TOP_RIGHT);
 
+  //const show = ref(props.show);
 
   const showAlert = () => {
     if ($alertComponent.value) {
@@ -47,6 +55,13 @@ import { ref} from 'vue';
       $alertComponent.value.classList.add('fade-out');
     }
   };
+
+  //watch(() => props.show, () => {
+  //  show.value = props.show;
+  //  if (props.show) {
+  //    showAlert();
+  //  }
+  //});
 </script>
 
 <style scoped lang="scss">
