@@ -20,9 +20,9 @@ class CharactersController {
   }
 
   //CRUD-Methods
-  async getCharacters(page: number = 1): Promise<ICharacters> {
+  async getCharacters(page: number = 1, name?: string): Promise<ICharacters> {
     try {
-      const response = await axios.get<ICharacters>(characters_url, { params: { page } });
+      const response = await axios.get<ICharacters>(characters_url, { params: { page, name } });
       return response.data;
 
     } catch( error: unknown ) {
@@ -33,7 +33,7 @@ class CharactersController {
         if (axiosError.response) {
           switch(axiosError.response.status) {
             case 404:
-              throw new Error('Página no encontrada');
+              return { info: { count: 0, pages: 0, next: '', prev: null }, results: [] };
             case 500:
               throw new Error(ErrorMsg.SERVER_ERROR);
             default:

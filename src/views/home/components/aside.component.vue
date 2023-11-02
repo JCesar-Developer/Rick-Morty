@@ -13,14 +13,19 @@
     <div class="w-80 mt-4">
       <input id="searchbar" type="text" placeholder="Encuentra un personaje" class="w-100" v-model="searchText">
     </div>
-
-    <div>{{ searchText }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import debounce from 'lodash.debounce'
+
+const emit = defineEmits({ search: (value: string) => true });
 const searchText = ref<string>('');
+
+watch(searchText, debounce(() => {
+  emit('search', searchText.value);
+}, 500))
 </script>
 
 <style scoped lang="scss">
@@ -46,7 +51,6 @@ const searchText = ref<string>('');
     &::placeholder {
       color: $t-gray;
     }
-
   }
 }
 </style>

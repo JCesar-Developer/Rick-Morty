@@ -1,7 +1,7 @@
 <template>
   <div class="infinite-scroll d-flex flex-column" ref="scrollContainer" @scroll="handleScrollEnd">
     <slot></slot>
-    <Spinner v-if="!stopScroll" class="my-3"></Spinner>
+    <Spinner v-if="!stopScroll && loading" class="my-3"></Spinner>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import Spinner from './spinner.component.vue';
 const emit = defineEmits(['scroll-end'])
 const props = defineProps({ 
   stopScroll: { type: Boolean, required: false, default: false },
+  loading: { type: Boolean, required: false, default: false }
 })
 
 const scrollContainer = ref<HTMLElement|null>(null)

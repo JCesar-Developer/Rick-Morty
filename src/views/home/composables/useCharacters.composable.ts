@@ -17,11 +17,22 @@ export default function useCharacters() {
     }
   }
 
-  const updateCharacters = async ( currentPage: number): Promise<void> => {
+  const loadMoreCharacters = async (currentPage: number, name?: string): Promise<void> => {
     try {
-      const charactersData = await charactersController.getCharacters(currentPage);
+      const charactersData = await charactersController.getCharacters(currentPage, name);
       characters.value = [...characters.value, ...charactersData.results];
     
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  const updateCharacters = async (currentPage: number, name?: string) => {
+    try {
+      const charactersData = await charactersController.getCharacters(currentPage, name);
+      characters.value = charactersData.results;
+      return charactersData.info.pages;
+
     } catch (error: any) {
       throw error;
     }
@@ -31,27 +42,7 @@ export default function useCharacters() {
   return {
     characters,
     getCharacters,
+    loadMoreCharacters,
     updateCharacters,
   };
 }
-
-      
-
-      //if (error.response) {
-      //  // La solicitud se realizó y el servidor respondió con un código de estado
-      //  // que cae fuera del rango de 2xx
-      //  switch(error.response.status) {
-      //    case 404:
-      //      throw new Error('Personaje no encontrado');
-      //    case 500:
-      //      throw new Error('Error interno del servidor');
-      //    default:
-      //      throw new Error(error);
-      //  }
-      //} else if (error.request) {
-      //  // La solicitud se realizó pero no se recibió ninguna respuesta
-      //  throw new Error('No se recibió respuesta del servidor');
-      //} else {
-      //  // Algo sucedió al configurar la solicitud que desencadenó un error
-      //  throw new Error('Error al configurar la solicitud');
-      //}
