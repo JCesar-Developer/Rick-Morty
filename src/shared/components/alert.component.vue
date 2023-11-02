@@ -1,5 +1,5 @@
 <template>
-  <div id="alert-component" ref="$alertComponent" class="py-2 px-3 rounded-4 top-right" :class="class">
+  <div id="alert-component" ref="$alertComponent" class="py-2 px-3 rounded-4 d-none" :class="[newClass, position]">
     <div class="d-flex justify-content-between align-items-center gap-4">
 
       <span></span>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue';
+import { ref} from 'vue';
 
   enum AlertPosition {
     TOP = 'top',
@@ -20,15 +20,12 @@ import { ref, watch, onMounted } from 'vue';
     BOTTOM = 'bottom',
   }
 
-  const props = defineProps({
-    class: { type: String, default: 'bg-warning text-white', required: false },
-    message: { type: String, default: 'This is an alert component', required: true },
-    position: { type: String as () => AlertPosition, default: AlertPosition.TOP_RIGHT, required: false },
-    show: Boolean,
-  });
-
   const $alertComponent = ref<HTMLElement | null>(null);
-  //const show = ref(props.show);
+
+  const newClass = ref<string>('bg-warning text-white');
+  const message = ref<string>('This is an alert component');
+  const position = ref<AlertPosition>(AlertPosition.TOP_RIGHT);
+
 
   const showAlert = () => {
     if ($alertComponent.value) {
@@ -50,13 +47,6 @@ import { ref, watch, onMounted } from 'vue';
       $alertComponent.value.classList.add('fade-out');
     }
   };
-
-  //watch(() => props.show, () => {
-  //  show.value = props.show;
-  //  if (props.show) {
-  //    showAlert();
-  //  }
-  //});
 </script>
 
 <style scoped lang="scss">
@@ -108,6 +98,7 @@ import { ref, watch, onMounted } from 'vue';
     color: #333333;
   }
 }
+
 
 #alert-component.fade-in {
   animation: fadeIn 0.5s ease-in-out forwards;
