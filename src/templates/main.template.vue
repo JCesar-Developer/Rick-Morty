@@ -9,35 +9,28 @@
     <!-- Aside -->
     <Aside class="col-lg-3 p-0" @search="searchCharacters($event)"></Aside>
 
-    <!-- Infinite-scroll -->
-    <div ref="$scrollContainer" class="col-lg-9 p-0 position-relative">    
-      <InfiniteScroll :stop-scroll="stopScroll" :loading="showScrollLoading" class="center py-5" @scroll-end="onScrollEnd">
-        <div class="thin-container">
-      
-          <!-- Loading... -->
-          <template v-if="showLoadingScreen">
-            <RickMortyLoading/>
+    <div class="col-lg-9 p-0 position-relative">
+
+      <Transition name="fade">
+        <!-- Loading-view -->
+        <template v-if="showLoadingScreen">
+          <Loading/>
+        </template>
+  
+        <template v-else>
+          <!-- Home-view -->
+          <template v-if="characters.length > 0">
+            <Home :characters="characters"/>
           </template>
 
-          <transition name="fade">
-            <div v-if="!showLoadingScreen">
+          <!-- Not-found-view -->
+          <template v-else>
+            <NotFound/>
+          </template>
+        </template>
+      </Transition>
 
-              <!-- Home-view -->
-              <template v-if="characters.length > 0">
-                <Home :characters="characters"/>
-              </template>
-              
-              <!-- Not-found-view -->
-              <template v-else>
-                <NotFound/>
-              </template>
-            </div>
-          </transition>
-      
-        </div>
-      </InfiniteScroll>
     </div>
-
   </div>
 </template>
 
@@ -47,12 +40,11 @@ import { ref, onBeforeMount } from 'vue';
 //Pages
 import NotFound from '@/views/not-found.view.vue';
 import Home from '@/views/home/home.view.vue';
+import Loading from '@/views/loading.view.vue';
 
 //Components
 import Alert from '@/shared/components/alert/alert.component.vue';
 import Aside from '@/shared/components/aside.component.vue';
-import InfiniteScroll from '@/shared/components/infinite-scroll.component.vue';
-import RickMortyLoading from '@/shared/components/rick-morty-loading.component.vue';
 
 //Composables
 import useCharacters from '@/shared/composables/useCharacters.composable';
@@ -61,19 +53,20 @@ import useAlert from '@/shared/components/alert/useAlert.composable'
 //Types
 import type { ICharactersParams } from '@/api/api';
 
-
   const { characters, getCharacters, loadMoreCharacters } = useCharacters();
   const { alert, setMessage, showAlert } = useAlert();
 
   const $scrollContainer = ref<HTMLElement|null>(null);
   const stopScroll = ref<boolean>(false);
   const showScrollLoading = ref<boolean>(false);
-  const showLoadingScreen = ref<boolean>(true);
+  const showLoadingScreen = ref<boolean>(false);
 
   let totalPages: number;
   let params: ICharactersParams = { page: 1 }
 
   onBeforeMount( async () => {
+    showLoadingScreen.value = true;
+
     await getCharacters( params )
       .then( pages => totalPages = pages )
       .catch( err => {
@@ -81,8 +74,26 @@ import type { ICharactersParams } from '@/api/api';
         showAlert();
       });
 
-      showLoadingScreen.value = false;
+    showLoadingScreen.value = false;
   });
+
+  const searchCharacters = async (newParams: ICharactersParams) => {
+    showLoadingScreen.value = true;
+    params = newParams;
+    //scrollTop();
+
+    await getCharacters( params )
+      .then( pages => totalPages = pages )
+      .catch( err => {
+        alert.message = err;
+        alert.show = !alert.show;
+      });
+    
+    setTimeout(() => {
+      showLoadingScreen.value = false;
+    }, 500);
+    //checkScrollStatus();
+  }
 
   const onScrollEnd = async () => {
     if( params.page >= totalPages ) return;
@@ -97,24 +108,6 @@ import type { ICharactersParams } from '@/api/api';
         showAlert();
       });
     
-    checkScrollStatus();
-  }
-
-  const searchCharacters = async (newParams: ICharactersParams) => {
-    showLoadingScreen.value = true;
-    params = newParams;
-    scrollTop();
-
-    await getCharacters( params )
-      .then( pages => totalPages = pages )
-      .catch( err => {
-        alert.message = err;
-        alert.show = !alert.show;
-      });
-    
-    setTimeout(() => {
-      showLoadingScreen.value = false;
-    }, 500);
     checkScrollStatus();
   }
 
@@ -137,31 +130,6 @@ import type { ICharactersParams } from '@/api/api';
       display: none !important;
     }
   }
-
-  .infinite-scroll {
-    .thin-container {
-      width: 900px;
-
-      @media (max-width: 1200px) {
-        width: 100%;
-        padding: 0 3rem !important;
-      }
-      @media (max-width: 992px) {
-        width: 900px;
-        padding: 0 2rem !important;
-      }
-      @media (max-width: 900px) {
-        width: 100%;
-      }
-      @media (max-width: 768px) {
-        padding: 0 1rem !important;
-      }
-      @media (max-width: 680px) and (min-width: 576px){
-        .card { width: 100%; }
-      }
-    }
-  }
-
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s ease-in-out;
   }

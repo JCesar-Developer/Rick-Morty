@@ -1,5 +1,5 @@
 <template>
-  <div id="rick-morty-loading" class="black-curtain center justify-content-center">
+  <div id="loading-view" class="black-curtain center justify-content-center">
     <img class="loading" src="/src/assets/images/loading.png" alt="Loading...">
   </div>
 </template>
@@ -9,7 +9,7 @@
 </script>
 
 <style scoped lang="scss">
-#rick-morty-loading {
+#loading-view {
   .loading {
     width: 200px;
     animation: blink .5s linear infinite;
