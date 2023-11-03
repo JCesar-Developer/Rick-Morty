@@ -2,6 +2,7 @@
   <div v-if="active" class="card-active-component">
     <div class="thin-container row justify-content-center">
 
+      <!-- CARD -->
       <div class="card-active col-11 col-sm-10 col-md-9 col-lg-8 bg-300">
         <div class="row h-100 justify-content-between">
 

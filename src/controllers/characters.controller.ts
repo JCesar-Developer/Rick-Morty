@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { base_url, Endpoints } from '@/api/api';
+import type { ICharactersParams } from '@/api/api';
 
 import { ErrorMsg } from '@/shared/interfaces/errors.enum';
 import type { ICharacters } from '@/models/characters.interface';
@@ -20,9 +21,10 @@ class CharactersController {
   }
 
   //CRUD-Methods
-  async getCharacters(page: number = 1, name?: string): Promise<ICharacters> {
+  async getCharacters(params: ICharactersParams): Promise<ICharacters> {
+
     try {
-      const response = await axios.get<ICharacters>(characters_url, { params: { page, name } });
+      const response = await axios.get<ICharacters>(characters_url, { params });
       return response.data;
 
     } catch( error: unknown ) {
@@ -44,7 +46,7 @@ class CharactersController {
         }
 
       } else {
-        throw new Error(ErrorMsg.REQUEST_ERROR);
+        throw new Error(ErrorMsg.SERVER_ERROR);
       }
     }
   }

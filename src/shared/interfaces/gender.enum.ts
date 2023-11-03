@@ -1,5 +1,4 @@
 enum Gender {
-  ALL = "",
   FEMALE = "female",
   MALE = "male",
   GENDERLESS = "genderless",

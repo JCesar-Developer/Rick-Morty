@@ -12,9 +12,18 @@
     </div>
 
     <!-- Filters -->
-    <div class="row w-80 justify-content-center">
-      <button class="col-5 t-black" @click="emitGender(Gender.MALE)">Male</button>
-      <button class="col-5 t-black" @click="emitGender(Gender.FEMALE)">Female</button>
+    <!-- filter-status -->
+    <div class="row w-100 justify-content-center gap-2">
+      <FilterButton v-for="status in statusHandler" @click="emitStatus(status)" :is-active="activeStatus == status.id">
+        {{ status.name }}
+      </FilterButton>
+    </div>
+
+    <!-- filter-gender -->
+    <div class="row w-100 justify-content-center mt-5 gap-2">
+      <FilterButton v-for="gender in genderHandler" @click="emitGender(gender)" :is-active="activeGender == gender.id">
+        {{ gender.name }}
+      </FilterButton>
     </div>
 
     <!-- Search-bar -->
@@ -27,23 +36,28 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import debounce from 'lodash.debounce'
-import Gender from '@/shared/interfaces/gender.enum';
+import FilterButton from './filter-button.vue';
+import useStatusHandler from '../composables/useStatusHandler.composable';
+import useGenderHandler from '../composables/useGenderHandler.composable';
 
-  //TODO: Algo me dice que aun puede modularizarse más.
+import type { ICharactersParams } from '@/api/api';
+
   const emit = defineEmits({ 
-    search: (value: string) => value, 
-    gender: (value: string) => value,
+    search: (value: ICharactersParams) => value, 
   });
 
   const _search = ref<string>('');
+  const _params: ICharactersParams = { page: 1 };
 
   watch(_search, debounce(() => {
-    emit('search', _search.value);
+    _params.page = 1;
+    _params.name = _search.value;
+    emit('search', _params);
   }, 500))
 
-  const emitGender = ( gender: Gender ) => {
-    emit('gender', gender);
-  }
+  const { activeStatus, statusHandler, emitStatus,  } = useStatusHandler(_params, emit);
+  const { activeGender, genderHandler, emitGender } = useGenderHandler(_params, emit);
+
 </script>
 
 <style scoped lang="scss">

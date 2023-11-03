@@ -23,15 +23,15 @@ import { ref } from 'vue'
 import CardActive from './card-active.component.vue'
 import type { ICharacter } from '@/models/character.interface';
 
-defineProps({
-  character: { type: Object as () => ICharacter, required: true }
-})
+  defineProps({
+    character: { type: Object as () => ICharacter, required: true }
+  })
 
-const active = ref<boolean>(false)
+  const active = ref<boolean>(false)
 
-const toogleActive = () => {
-  active.value = !active.value
-}
+  const toogleActive = () => {
+    active.value = !active.value
+  }
 </script>
 
 <style scoped lang="scss">
@@ -45,7 +45,7 @@ const toogleActive = () => {
   aspect-ratio: 1/1.15;
   transition: all .2s ease-in-out;
 
-  @media( max-width: 500px ) {
+  @media( max-width: 480px ) {
     width: 100%;
     aspect-ratio: 1/1.25; 
   }
