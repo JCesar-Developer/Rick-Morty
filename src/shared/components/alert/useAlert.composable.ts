@@ -1,7 +1,7 @@
 import { AlertPosition } from '@/shared/components/alert/alert-position.enum';
 
 export default function useAlert() {
-  let alert: {
+  const alert: {
     show: boolean,
     message?: string,
     newClass?: string,

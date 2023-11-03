@@ -2,7 +2,7 @@
   <div id="home-view" class="row m-0 bg-700">
 
     <!-- Aside -->
-    <Aside class="col-3 p-0" @search="searchCharacters($event)"></Aside>
+    <Aside class="col-3 p-0" @search="searchCharacters($event)" @gender="searchCharacters($event)"></Aside>
     
     <!-- Infinite-scroll -->
     <div class="col-9 p-0 position-relative" ref="$scrollContainer">    

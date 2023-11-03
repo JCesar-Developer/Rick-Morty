@@ -6,12 +6,20 @@
       <img src="/src/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
     </div>
 
+    <!-- Aside-logo -->
     <div class="logo w-80 my-2">
       <img src="/src/assets/images/logo.png" alt="Space Cruiser" class="w-100">
     </div>
 
+    <!-- Filters -->
+    <div class="row w-80 justify-content-center">
+      <button class="col-5 t-black" @click="emitGender(Gender.MALE)">Male</button>
+      <button class="col-5 t-black" @click="emitGender(Gender.FEMALE)">Female</button>
+    </div>
+
+    <!-- Search-bar -->
     <div class="w-80 mt-4">
-      <input id="searchbar" type="text" placeholder="Encuentra un personaje" class="w-100" v-model="searchText">
+      <input id="searchbar" type="text" placeholder="Encuentra un personaje" class="w-100" v-model="_search">
     </div>
   </div>
 </template>
@@ -19,13 +27,23 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import debounce from 'lodash.debounce'
+import Gender from '@/shared/interfaces/gender.enum';
 
-const emit = defineEmits({ search: (value: string) => true });
-const searchText = ref<string>('');
+  //TODO: Algo me dice que aun puede modularizarse más.
+  const emit = defineEmits({ 
+    search: (value: string) => value, 
+    gender: (value: string) => value,
+  });
 
-watch(searchText, debounce(() => {
-  emit('search', searchText.value);
-}, 500))
+  const _search = ref<string>('');
+
+  watch(_search, debounce(() => {
+    emit('search', _search.value);
+  }, 500))
+
+  const emitGender = ( gender: Gender ) => {
+    emit('gender', gender);
+  }
 </script>
 
 <style scoped lang="scss">

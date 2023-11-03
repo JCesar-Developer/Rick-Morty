@@ -36,7 +36,7 @@
         <h1 class="w-100 text-start text-uppercase mb-2">Accent colors</h1>
   
         <div class="color-palete">
-          <div class="bg-container g-500 w-100">Green1</div>
+          <div class="bg-container bg-g-500 w-100">Green1</div>
           <div class="bg-container g-300 w-100">Green2</div>
           <div class="bg-container g-100 w-100">Green2</div>
         </div>

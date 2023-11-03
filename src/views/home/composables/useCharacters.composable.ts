@@ -7,35 +7,20 @@ export default function useCharacters() {
   const characters = ref<ICharacter[]>([]);
 
   const getCharacters = async (currentPage: number): Promise<number> => {
-    try {
-      const charactersData = await charactersController.getCharacters(currentPage);
-      characters.value = charactersData.results;
-      return charactersData.info.pages;
-
-    } catch (error: any) {
-      throw error;
-    }
+    const charactersData = await charactersController.getCharacters(currentPage);
+    characters.value = charactersData.results;
+    return charactersData.info.pages;
   }
 
   const loadMoreCharacters = async (currentPage: number, name?: string): Promise<void> => {
-    try {
-      const charactersData = await charactersController.getCharacters(currentPage, name);
-      characters.value = [...characters.value, ...charactersData.results];
-    
-    } catch (error: any) {
-      throw error;
-    }
+    const charactersData = await charactersController.getCharacters(currentPage, name);
+    characters.value = [...characters.value, ...charactersData.results];
   }
 
-  const updateCharacters = async (currentPage: number, name?: string) => {
-    try {
-      const charactersData = await charactersController.getCharacters(currentPage, name);
-      characters.value = charactersData.results;
-      return charactersData.info.pages;
-
-    } catch (error: any) {
-      throw error;
-    }
+  const updateCharacters = async (currentPage: number, name?: string): Promise<number> => {
+    const charactersData = await charactersController.getCharacters(currentPage, name);
+    characters.value = charactersData.results;
+    return charactersData.info.pages;
   }
 
 
