@@ -5,11 +5,3 @@
     <h2 class="text-center h5">Tal parece que ese personaje no existe en este universo.</h2>
   </div>
 </template>
-
-<!--<script setup lang="ts">
-
-</script>
-
-<style scoped lang="scss">
-
-</style>-->

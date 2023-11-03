@@ -1,5 +1,5 @@
 <template>
-  <div id="home-view">
+  <div id="styles-view">
     <div class="row w-100 gap-5 py-5 justify-content-center">
   
       <section class="style-container">
@@ -50,17 +50,18 @@
 </script>
 
 <style scoped lang="scss">
-.style-container {
-  width: 800px;
+#styles-view {
+  .style-container {
+    width: 800px;
 
-  .color-palete {
-    border: lightgray 1px solid;
-    width: 100%;
+    .color-palete {
+      border: lightgray 1px solid;
+      width: 100%;
 
-    .bg-container {
-      height: 50px;
+      .bg-container {
+        height: 50px;
+      }
     }
   }
 }
-
 </style>

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import Home from '@/views/home/home.vue';
+import Main from '@/templates/main.template.vue';
 </script>
 
 <template>
-  <Home></Home>
+  <!--<Home></Home>-->
+  <Main></Main>
 </template>
 
 <style lang="scss">
