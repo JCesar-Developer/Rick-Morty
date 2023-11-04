@@ -8,14 +8,14 @@ export default function useCharacters() {
   const characters = ref<ICharacter[]>([]);
 
   const getCharacters = async (params: ICharactersParams): Promise<number> => {
-    const charactersData = await charactersController.getCharacters(params);
-    characters.value = charactersData.results;
-    return charactersData.info.pages;
+      const charactersData = await charactersController.getCharacters(params);
+      characters.value = charactersData.results;
+      return charactersData.info.pages;
   }
 
   const loadMoreCharacters = async (params: ICharactersParams): Promise<void> => {
-    const charactersData = await charactersController.getCharacters(params);
-    characters.value = [...characters.value, ...charactersData.results];
+      const charactersData = await charactersController.getCharacters(params);
+      characters.value = [...characters.value, ...charactersData.results];
   }
 
   return {

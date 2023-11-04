@@ -13,7 +13,7 @@ export default function useAlert() {
   };
 
 
-  const setMessage = (message: string): void => {
+  const setAlertMessage = (message: string): void => {
     alert.message = message;
   }
 
@@ -23,7 +23,7 @@ export default function useAlert() {
 
   return {
     alert,
-    setMessage,
+    setAlertMessage,
     showAlert,
   }
 }

@@ -1,6 +1,8 @@
 import { ref } from 'vue';
+import { useParamsStore } from '@/stores/params.store';
 
 export default function useScroll() {
+  const paramsStore = useParamsStore();
   const stopScrolling = ref<boolean>(false);
   const showLoader = ref<boolean>(false);
 
@@ -10,11 +12,19 @@ export default function useScroll() {
   const hideScrollLoading = () => {
     showLoader.value = false;
   }
+  const checkScrollStatus = () => {
+    stopScrolling.value = ( noMorePages() );
+  };
+  const noMorePages = () => {
+    return paramsStore.params.page >= paramsStore.totalPages;
+  }
 
   return {
     stopScrolling,
     showLoader,
     showScrollLoading,
     hideScrollLoading,
+    checkScrollStatus,
+    noMorePages,
   }
 }

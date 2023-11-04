@@ -18,9 +18,6 @@ import useCharacters from './composables/useCharacters.composable';
 import useScroll from './composables/useScroll.composable';
 import useSwipe from './composables/useSwipe.composable';
 
-//Types
-import type { ICharactersParams } from '@/api/api';
-
 export default defineComponent({
 
   components: { Alert, SideBar, Loading, NotFound, Home, BlackCurtain },
@@ -31,8 +28,8 @@ export default defineComponent({
     const paramsStore = useParamsStore();
     const sideBarStore = useSidebarStore();
     const { characters, getCharacters, loadMoreCharacters } = useCharacters();
-    const { alert, setMessage, showAlert } = useAlert();
-    const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading } = useScroll();
+    const { alert, setAlertMessage, showAlert } = useAlert();
+    const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading, checkScrollStatus, noMorePages } = useScroll();
     const { startSwipe, swipe, endSwipe } = useSwipe();
 
     onBeforeMount(async () => {
@@ -41,7 +38,7 @@ export default defineComponent({
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
-          setMessage(err);
+          setAlertMessage(err.toString());
           showAlert();
         });
 
@@ -49,11 +46,15 @@ export default defineComponent({
     });
 
     onMounted(() => {
+      autoActivateSideBar();
+    });
+
+    const autoActivateSideBar = () => {
       if ( getViewportWidth() > 992 ) return;
       setTimeout(() => {
         sideBarStore.activateSideBar();
       }, 1500);
-    });
+    }
 
     const searchCharacters = async (closeSideBar?: boolean) => {
       showLoadingScreen.value = true;
@@ -61,8 +62,8 @@ export default defineComponent({
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
-          alert.message = err;
-          alert.show = !alert.show;
+          setAlertMessage(err.toString());
+          showAlert();
         });
 
       setTimeout(() => {
@@ -75,7 +76,7 @@ export default defineComponent({
     };
 
     const loadMore = async () => {
-      if ( paramsStore.params.page >= paramsStore.totalPages ) return;
+      if ( noMorePages() ) return;
 
       showScrollLoading();
       paramsStore.increasePage(1);
@@ -83,15 +84,11 @@ export default defineComponent({
       await loadMoreCharacters( paramsStore.params )
         .then( () => hideScrollLoading() )
         .catch( err => {
-          setMessage(err);
+          setAlertMessage(err.toString());
           showAlert();
         });
 
       checkScrollStatus();
-    };
-
-    const checkScrollStatus = () => {
-      stopScrolling.value = ( paramsStore.params.page >= paramsStore.totalPages );
     };
 
     const getViewportWidth = (): number => {
