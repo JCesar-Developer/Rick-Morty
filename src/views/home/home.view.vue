@@ -22,14 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
-import type { PropType } from 'vue';
-
 import Header from './components/header.component.vue';
 import Card from './components/card.component.vue';
 import InfiniteScroll from '@/shared/components/infinite-scroll.component.vue';
 
 import type { ICharacter } from '@/models/character.interface';
+import type { PropType } from 'vue';
 
   defineProps({
     characters: { type: Array as PropType<ICharacter[]>, required: true },
@@ -84,6 +82,13 @@ import type { ICharacter } from '@/models/character.interface';
   }
 
   .infinite-scroll {
+
+    @media (max-width: 575px) {
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+    }
+
     .thin-container {
       width: 900px;
 
