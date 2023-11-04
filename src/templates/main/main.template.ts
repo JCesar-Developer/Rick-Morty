@@ -55,10 +55,8 @@ export default defineComponent({
       }, 1500);
     });
 
-    const searchCharacters = async (newParams: ICharactersParams, closeSideBar?: boolean) => {
+    const searchCharacters = async (closeSideBar?: boolean) => {
       showLoadingScreen.value = true;
-      //paramsStore.setParams( newParams );
-
 
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )

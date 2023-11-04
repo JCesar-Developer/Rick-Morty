@@ -14,7 +14,7 @@
   <div id="main-template" class="d-flex min-vh-100 flex-column flex-lg-row m-0 bg-700" @touchstart="startSwipe" @touchmove="swipe" @touchend="endSwipe">
 
     <!-- Aside -->
-    <SideBar class="col-lg-3 p-0" @search="searchCharacters($event)"/>
+    <SideBar class="col-lg-3 p-0" @search="searchCharacters()"/>
 
     <div class="col-lg-9 p-0 position-relative">
 
