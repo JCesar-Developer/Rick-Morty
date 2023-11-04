@@ -27,7 +27,7 @@
             <Home 
               @scroll-end="loadMore" 
               :characters="characters" 
-              :stop-scroll="stopScroll" 
+              :stop-scroll="stopScrolling" 
               :show-scroll-loader="showLoader"/>
           </template>
 

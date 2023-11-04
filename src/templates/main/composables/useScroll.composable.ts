@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 
 export default function useScroll() {
-  const stopScroll = ref<boolean>(false);
+  const stopScrolling = ref<boolean>(false);
   const showLoader = ref<boolean>(false);
 
   const showScrollLoading = () => {
@@ -12,7 +12,7 @@ export default function useScroll() {
   }
 
   return {
-    stopScroll,
+    stopScrolling,
     showLoader,
     showScrollLoading,
     hideScrollLoading,

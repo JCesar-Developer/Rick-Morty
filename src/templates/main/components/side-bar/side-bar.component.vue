@@ -36,9 +36,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import debounce from 'lodash.debounce'
-import FilterButton from './filter-button.vue';
-import useStatusHandler from '../composables/useStatusHandler.composable';
-import useGenderHandler from '../composables/useGenderHandler.composable';
+import FilterButton from '@/shared/components/filter-button.vue';
+import useStatusHandler from './composables/useStatusHandler.composable';
+import useGenderHandler from './composables/useGenderHandler.composable';
 
 import type { ICharactersParams } from '@/api/api';
 

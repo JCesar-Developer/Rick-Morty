@@ -7,11 +7,11 @@ import Loading from '@/views/loading.view.vue';
 
 //Components
 import Alert from '@/shared/components/alert/alert.component.vue';
-import SideBar from '@/shared/components/side-bar.component.vue';
+import SideBar from './components/side-bar/side-bar.component.vue';
 
 //Composables
 import useAlert from '@/shared/components/alert/useAlert.composable';
-import useCharacters from '@/shared/composables/useCharacters.composable';
+import useCharacters from './composables/useCharacters.composable';
 import useScroll from './composables/useScroll.composable';
 
 //Types
@@ -29,7 +29,7 @@ export default defineComponent({
 
     const { characters, getCharacters, loadMoreCharacters } = useCharacters();
     const { alert, setMessage, showAlert } = useAlert();
-    const { stopScroll, showLoader, showScrollLoading, hideScrollLoading } = useScroll();
+    const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading } = useScroll();
 
     onBeforeMount(async () => {
       showLoadingScreen.value = true;
@@ -78,7 +78,7 @@ export default defineComponent({
     };
 
     const checkScrollStatus = () => {
-      stopScroll.value = ( params.page >= totalPages );
+      stopScrolling.value = ( params.page >= totalPages );
     };
 
     return {
@@ -88,7 +88,7 @@ export default defineComponent({
       searchCharacters,
       showLoader,
       showLoadingScreen,
-      stopScroll,
+      stopScrolling,
     };
   },
 });
