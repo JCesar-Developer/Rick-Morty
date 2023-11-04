@@ -8,7 +8,7 @@
       </div>
 
       <!-- nav-bar -->
-      <div id="nav-btn" @click="$emit('activateSideBar')">
+      <div id="nav-btn" @click="sideBarStore.activateSideBar">
         <img id="cruiser" src="@/assets/images/space-cruiser.png" alt="cruiser">
         <img id="portal" src="@/assets/images/portal.png" alt="portal">
       </div>
@@ -18,7 +18,8 @@
 </template>
 
 <script setup lang="ts">
-
+import { useSidebarStore } from '@/stores/sidebar.store';
+const sideBarStore = useSidebarStore();
 </script>
 
 <style scoped lang="scss">

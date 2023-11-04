@@ -7,6 +7,9 @@
     :new-class="alert.newClass" 
     :position="alert.position"/>
 
+  <!-- BLACK-CURTAIN -->
+  <BlackCurtain :class="{'is-active': sideBarStore.isOpen}" @click="sideBarStore.deactivateSideBar"/>
+
   <!-- MAIN-TEMPLATE -->
   <div id="main-template" class="d-flex min-vh-100 flex-column flex-lg-row m-0 bg-700">
 

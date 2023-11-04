@@ -1,15 +1,17 @@
-import { ref, onBeforeMount, defineComponent } from 'vue';
+import { defineComponent, ref, onBeforeMount, onMounted } from 'vue';
 
 //Pages
 import NotFound from '@/views/not-found.view.vue';
-import Home from '@/views/home/home.view.vue';
+import Home from '@/views/home-view/home.view.vue';
 import Loading from '@/views/loading.view.vue';
 
 //Components
 import Alert from '@/shared/components/alert/alert.component.vue';
+import BlackCurtain from '@/shared/components/black-curtain.component.vue';
 import SideBar from './components/side-bar/side-bar.component.vue';
 
 //Composables
+import { useSidebarStore } from '@/stores/sidebar.store';
 import useAlert from '@/shared/components/alert/useAlert.composable';
 import useCharacters from './composables/useCharacters.composable';
 import useScroll from './composables/useScroll.composable';
@@ -19,7 +21,7 @@ import type { ICharactersParams } from '@/api/api';
 
 export default defineComponent({
 
-  components: { Alert, SideBar, Loading, NotFound, Home },
+  components: { Alert, SideBar, Loading, NotFound, Home, BlackCurtain },
 
   setup() {
     const showLoadingScreen = ref<boolean>(false);
@@ -27,6 +29,7 @@ export default defineComponent({
     let totalPages: number;
     let params: ICharactersParams = { page: 1 };
 
+    const sideBarStore = useSidebarStore();
     const { characters, getCharacters, loadMoreCharacters } = useCharacters();
     const { alert, setMessage, showAlert } = useAlert();
     const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading } = useScroll();
@@ -44,9 +47,23 @@ export default defineComponent({
       showLoadingScreen.value = false;
     });
 
+    onMounted(() => {
+      if ( getViewportWidth() > 992 ) return;
+      setTimeout(() => {
+        sideBarStore.activateSideBar();
+      }, 1500);
+    });
+
     const searchCharacters = async (newParams: ICharactersParams) => {
+      //if( params.name !== newParams.name ) console.log('new search');
+
+      console.log('local params name', params);
+      console.log('new params name', newParams);
+      
+
       showLoadingScreen.value = true;
       params = newParams;
+
 
       await getCharacters( params )
         .then( tPages => totalPages = tPages )
@@ -81,6 +98,10 @@ export default defineComponent({
       stopScrolling.value = ( params.page >= totalPages );
     };
 
+    const getViewportWidth = (): number => {
+      return window.innerWidth;
+    };
+
     return {
       alert,
       characters,
@@ -88,6 +109,7 @@ export default defineComponent({
       searchCharacters,
       showLoader,
       showLoadingScreen,
+      sideBarStore,
       stopScrolling,
     };
   },

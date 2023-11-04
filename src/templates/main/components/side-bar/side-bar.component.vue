@@ -1,5 +1,8 @@
 <template>
-  <div id="side-bar-component" class="d-flex flex-column justify-content-center align-items-center">
+
+  <div id="side-bar-component" class="d-flex flex-column justify-content-center align-items-center" :class="{'active': sideBarStore.isOpen}">
+
+    <CollapseButton @click="sideBarStore.deactivateSideBar"/>
 
     <!-- Image -->
     <div class="space-cruiser w-80">
@@ -36,10 +39,17 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import debounce from 'lodash.debounce'
+
+//components
 import FilterButton from '@/shared/components/filter-button.vue';
+import CollapseButton from '@/shared/components/collapse-button.vue';
+
+//composables
+import { useSidebarStore } from '@/stores/sidebar.store';
 import useStatusHandler from './composables/useStatusHandler.composable';
 import useGenderHandler from './composables/useGenderHandler.composable';
 
+//types
 import type { ICharactersParams } from '@/api/api';
 
   const emit = defineEmits({ 
@@ -48,6 +58,7 @@ import type { ICharactersParams } from '@/api/api';
 
   const _search = ref<string>('');
   const _params: ICharactersParams = { page: 1 };
+  const sideBarStore = useSidebarStore();
 
   watch(_search, debounce(() => {
     _params.page = 1;
@@ -72,17 +83,29 @@ import type { ICharactersParams } from '@/api/api';
 #side-bar-component {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: $primary-color;
+  z-index: 2;
 
   @media (max-width: 992px) {
     position: absolute;
     max-width: 380px;
     height: 100vh;
-    z-index: 2;
     left: -380px;
-    transition: left 0.4s ease;
+    transition: left 0.5s ease-in-out;
 
     &.active {
       left: 0;
+    }
+  }
+
+  #collapse-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    display: none;
+
+    @media (max-width: 992px) {
+      display: flex;
     }
   }
 
