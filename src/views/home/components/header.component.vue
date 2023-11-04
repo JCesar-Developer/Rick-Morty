@@ -1,19 +1,24 @@
 <template>
   <header id="header">
     <div class="thin-container d-flex justify-content-between">
+
+      <!-- logo -->
       <div id="logo">
         <img src="@/assets/images/logo.png" alt="Logo">
       </div>
-      <div id="nav-btn">
+
+      <!-- nav-bar -->
+      <div id="nav-btn" @click="$emit('activateSideBar')">
         <img id="cruiser" src="@/assets/images/space-cruiser.png" alt="cruiser">
         <img id="portal" src="@/assets/images/portal.png" alt="portal">
       </div>
+
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-//import logo from '@/assets/'
+
 </script>
 
 <style scoped lang="scss">

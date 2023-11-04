@@ -63,12 +63,27 @@ import type { ICharactersParams } from '@/api/api';
 <style scoped lang="scss">
 @import '@/assets/styles/colors.scss';
 
+//custom-utilies
+.w-80 {
+  width: 80% !important;
+}
+
+//Viewport
 #side-bar-component {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: $primary-color;
 
-  .w-80 {
-    width: 80% !important;
+  @media (max-width: 992px) {
+    position: absolute;
+    max-width: 380px;
+    height: 100vh;
+    z-index: 2;
+    left: -380px;
+    transition: left 0.4s ease;
+
+    &.active {
+      left: 0;
+    }
   }
 
   #searchbar {
