@@ -1,6 +1,6 @@
 <template>
   <div id="loading-view" class="black-curtain center justify-content-center">
-    <img class="loading" src="/src/assets/images/loading.png" alt="Loading...">
+    <img class="loading" src="@/assets/images/loading.png" alt="Loading...">
   </div>
 </template>
 

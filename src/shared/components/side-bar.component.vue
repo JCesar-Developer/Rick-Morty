@@ -3,12 +3,12 @@
 
     <!-- Image -->
     <div class="space-cruiser w-80">
-      <img src="/src/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
+      <img src="@/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
     </div>
 
     <!-- Logo -->
     <div class="logo w-80 my-2">
-      <img src="/src/assets/images/logo.png" alt="Space Cruiser" class="w-100">
+      <img src="@/assets/images/logo.png" alt="Space Cruiser" class="w-100">
     </div>
 
     <!-- Filters -->

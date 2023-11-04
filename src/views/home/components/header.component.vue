@@ -2,18 +2,18 @@
   <header id="header">
     <div class="thin-container d-flex justify-content-between">
       <div id="logo">
-        <img src="src/assets/images/logo.png" alt="Logo">
+        <img src="@/assets/images/logo.png" alt="Logo">
       </div>
       <div id="nav-btn">
-        <img id="cruiser" src="src/assets/images/space-cruiser.png" alt="cruiser">
-        <img id="portal" src="src/assets/images/portal.png" alt="portal">
+        <img id="cruiser" src="@/assets/images/space-cruiser.png" alt="cruiser">
+        <img id="portal" src="@/assets/images/portal.png" alt="portal">
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-
+//import logo from '@/assets/'
 </script>
 
 <style scoped lang="scss">
