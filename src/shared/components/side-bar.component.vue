@@ -1,27 +1,27 @@
 <template>
-  <div id="aside-component" class="d-flex flex-column justify-content-center align-items-center">
+  <div id="side-bar-component" class="d-flex flex-column justify-content-center align-items-center">
 
-    <!-- Aside-image -->
+    <!-- Image -->
     <div class="space-cruiser w-80">
       <img src="/src/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
     </div>
 
-    <!-- Aside-logo -->
+    <!-- Logo -->
     <div class="logo w-80 my-2">
       <img src="/src/assets/images/logo.png" alt="Space Cruiser" class="w-100">
     </div>
 
     <!-- Filters -->
     <!-- filter-status -->
-    <div class="row w-100 justify-content-center gap-2">
-      <FilterButton v-for="status in statusHandler" @click="emitStatus(status)" :is-active="activeStatus == status.id">
+    <div class="row w-80 justify-content-center gap-2">
+      <FilterButton v-for="status in statusHandler" :key="status.id" @click="emitStatus(status)" :is-active="activeStatus == status.id">
         {{ status.name }}
       </FilterButton>
     </div>
 
     <!-- filter-gender -->
-    <div class="row w-100 justify-content-center mt-5 gap-2">
-      <FilterButton v-for="gender in genderHandler" @click="emitGender(gender)" :is-active="activeGender == gender.id">
+    <div class="row w-80 justify-content-center mt-5 gap-2">
+      <FilterButton v-for="gender in genderHandler" :key="gender.id" @click="emitGender(gender)" :is-active="activeGender == gender.id">
         {{ gender.name }}
       </FilterButton>
     </div>
@@ -63,7 +63,7 @@ import type { ICharactersParams } from '@/api/api';
 <style scoped lang="scss">
 @import '@/assets/styles/colors.scss';
 
-#aside-component {
+#side-bar-component {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: rgba(0, 0, 0, 0.3);
 

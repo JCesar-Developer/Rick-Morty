@@ -20,11 +20,11 @@ const scrollContainer = ref<HTMLElement|null>(null)
 const handleScrollEnd = () => {
   if (!scrollContainer.value) return;
 
-  const viewportHeight = window.innerHeight;
   const totalHeight = scrollContainer.value.scrollHeight;
   const scrollPosition = scrollContainer.value.scrollTop;
+  const viewportHeight = window.innerHeight;
 
-  if ((totalHeight - scrollPosition <= viewportHeight) && !props.stopScroll ) {
+  if ((totalHeight - scrollPosition -1 <= viewportHeight) && !props.stopScroll ) {
     emit('scroll-end');
   }
 }

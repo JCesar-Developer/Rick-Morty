@@ -19,7 +19,6 @@ button {
   background-color: $g-300;
   color: $bg-700;
   font-weight: 400;
-  border: solid 2px default;
   transition: all .3s ease-in-out;
 
   &.active {

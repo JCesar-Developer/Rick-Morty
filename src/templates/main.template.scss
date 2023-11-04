@@ -1,0 +1,13 @@
+#main-template {
+  #side-bar-component {
+    @media (max-width: 992px) {
+      display: none !important;
+    }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s ease-in-out;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+  }
+}
