@@ -11,7 +11,7 @@
   <BlackCurtain :class="{'is-active': sideBarStore.isOpen}" @click="sideBarStore.deactivateSideBar"/>
 
   <!-- MAIN-TEMPLATE -->
-  <div id="main-template" class="d-flex min-vh-100 flex-column flex-lg-row m-0 bg-700">
+  <div id="main-template" class="d-flex min-vh-100 flex-column flex-lg-row m-0 bg-700" @touchstart="startSwipe" @touchmove="swipe" @touchend="endSwipe">
 
     <!-- Aside -->
     <SideBar class="col-lg-3 p-0" @search="searchCharacters($event)"/>

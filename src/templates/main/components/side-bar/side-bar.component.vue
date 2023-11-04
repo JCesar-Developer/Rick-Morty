@@ -17,14 +17,14 @@
     <!-- Filters -->
     <!-- filter-status -->
     <div class="row w-80 justify-content-center gap-2">
-      <FilterButton v-for="status in statusHandler" :key="status.id" @click="emitStatus(status)" :is-active="activeStatus == status.id">
+      <FilterButton v-for="status in statusHandler" :key="status.id" @click="setStatus(status)" :is-active="activeStatus == status.id">
         {{ status.name }}
       </FilterButton>
     </div>
 
     <!-- filter-gender -->
     <div class="row w-80 justify-content-center mt-5 gap-2">
-      <FilterButton v-for="gender in genderHandler" :key="gender.id" @click="emitGender(gender)" :is-active="activeGender == gender.id">
+      <FilterButton v-for="gender in genderHandler" :key="gender.id" @click="setGender(gender)" :is-active="activeGender == gender.id">
         {{ gender.name }}
       </FilterButton>
     </div>
@@ -46,28 +46,24 @@ import CollapseButton from '@/shared/components/collapse-button.vue';
 
 //composables
 import { useSidebarStore } from '@/stores/sidebar.store';
+import { useParamsStore } from '@/stores/params.store';
 import useStatusHandler from './composables/useStatusHandler.composable';
 import useGenderHandler from './composables/useGenderHandler.composable';
 
-//types
-import type { ICharactersParams } from '@/api/api';
-
-  const emit = defineEmits({ 
-    search: (value: ICharactersParams) => value, 
-  });
+  const emit = defineEmits(['search']);
 
   const _search = ref<string>('');
-  const _params: ICharactersParams = { page: 1 };
+  const paramsStore = useParamsStore();
   const sideBarStore = useSidebarStore();
 
   watch(_search, debounce(() => {
-    _params.page = 1;
-    _params.name = _search.value;
-    emit('search', _params);
+    paramsStore.setPage(1);
+    paramsStore.setName(_search.value);
+    emit('search');
   }, 500))
 
-  const { activeStatus, statusHandler, emitStatus,  } = useStatusHandler(_params, emit);
-  const { activeGender, genderHandler, emitGender } = useGenderHandler(_params, emit);
+  const { activeStatus, statusHandler, setStatus } = useStatusHandler( emit );
+  const { activeGender, genderHandler, setGender } = useGenderHandler( emit );
 
 </script>
 
@@ -83,7 +79,7 @@ import type { ICharactersParams } from '@/api/api';
 #side-bar-component {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: $primary-color;
-  z-index: 2;
+  z-index: 1;
 
   @media (max-width: 992px) {
     position: absolute;

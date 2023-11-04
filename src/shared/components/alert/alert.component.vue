@@ -32,7 +32,7 @@ import { AlertPosition } from './alert-position.enum';
 
     setTimeout(() => {
       hideAlert();
-    }, 3000);
+    }, 5000);
   };
 
   const hideAlert = () => {

@@ -5,6 +5,11 @@ export const useSidebarStore = defineStore({
   state: () => ({
     isOpen: false,
   }),
+  getters: {
+    isSideBarActive(): boolean {
+      return this.isOpen;
+    },
+  },
   actions: {
     activateSideBar() {
       this.isOpen = true;
@@ -13,4 +18,4 @@ export const useSidebarStore = defineStore({
       this.isOpen = false;
     },
   },
-})
+});

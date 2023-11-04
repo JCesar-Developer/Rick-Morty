@@ -11,10 +11,12 @@ import BlackCurtain from '@/shared/components/black-curtain.component.vue';
 import SideBar from './components/side-bar/side-bar.component.vue';
 
 //Composables
+import { useParamsStore } from '@/stores/params.store';
 import { useSidebarStore } from '@/stores/sidebar.store';
-import useAlert from '@/shared/components/alert/useAlert.composable';
+import useAlert from './composables/useAlert.composable';
 import useCharacters from './composables/useCharacters.composable';
 import useScroll from './composables/useScroll.composable';
+import useSwipe from './composables/useSwipe.composable';
 
 //Types
 import type { ICharactersParams } from '@/api/api';
@@ -26,19 +28,18 @@ export default defineComponent({
   setup() {
     const showLoadingScreen = ref<boolean>(false);
 
-    let totalPages: number;
-    let params: ICharactersParams = { page: 1 };
-
+    const paramsStore = useParamsStore();
     const sideBarStore = useSidebarStore();
     const { characters, getCharacters, loadMoreCharacters } = useCharacters();
     const { alert, setMessage, showAlert } = useAlert();
     const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading } = useScroll();
+    const { startSwipe, swipe, endSwipe } = useSwipe();
 
     onBeforeMount(async () => {
       showLoadingScreen.value = true;
 
-      await getCharacters( params )
-        .then( tPages => totalPages = tPages )
+      await getCharacters( paramsStore.params )
+        .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
           setMessage(err);
           showAlert();
@@ -54,19 +55,13 @@ export default defineComponent({
       }, 1500);
     });
 
-    const searchCharacters = async (newParams: ICharactersParams) => {
-      //if( params.name !== newParams.name ) console.log('new search');
-
-      console.log('local params name', params);
-      console.log('new params name', newParams);
-      
-
+    const searchCharacters = async (newParams: ICharactersParams, closeSideBar?: boolean) => {
       showLoadingScreen.value = true;
-      params = newParams;
+      //paramsStore.setParams( newParams );
 
 
-      await getCharacters( params )
-        .then( tPages => totalPages = tPages )
+      await getCharacters( paramsStore.params )
+        .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
           alert.message = err;
           alert.show = !alert.show;
@@ -74,17 +69,20 @@ export default defineComponent({
 
       setTimeout(() => {
         showLoadingScreen.value = false;
+        if( closeSideBar && sideBarStore.isSideBarActive ) {
+          sideBarStore.deactivateSideBar();
+        }
       }, 500);
       checkScrollStatus();
     };
 
     const loadMore = async () => {
-      if ( params.page >= totalPages ) return;
+      if ( paramsStore.params.page >= paramsStore.totalPages ) return;
 
       showScrollLoading();
-      params.page++;
+      paramsStore.increasePage(1);
 
-      await loadMoreCharacters( params )
+      await loadMoreCharacters( paramsStore.params )
         .then( () => hideScrollLoading() )
         .catch( err => {
           setMessage(err);
@@ -95,7 +93,7 @@ export default defineComponent({
     };
 
     const checkScrollStatus = () => {
-      stopScrolling.value = ( params.page >= totalPages );
+      stopScrolling.value = ( paramsStore.params.page >= paramsStore.totalPages );
     };
 
     const getViewportWidth = (): number => {
@@ -111,6 +109,9 @@ export default defineComponent({
       showLoadingScreen,
       sideBarStore,
       stopScrolling,
+      startSwipe,
+      swipe,
+      endSwipe,
     };
   },
 });

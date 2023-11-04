@@ -1,5 +1,4 @@
 <template>
-<!--<button class="menu-button" @click="onEmit()">-->
   <button id="collapse-button">
     <div class="line"></div>
     <div class="line"></div>
@@ -7,10 +6,6 @@
   </button>
 
 </template>
-
-<!--<script setup lang="ts">
-
-</script>-->
 
 <style scoped lang="scss">
 #collapse-button {

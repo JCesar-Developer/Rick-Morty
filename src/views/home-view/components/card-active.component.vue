@@ -50,23 +50,24 @@ watch( () => props.active , ( active ) => {
 <style lang="scss">
 @import '@/assets/styles/colors.scss';
 .card-active-component {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 
   .card-active {
-    border: solid 3px $g-300;
-    overflow: hidden;
     border-radius: 8px;
+    border: solid 3px $g-300;
     height: 230px;
+    overflow: hidden;
 
     img {
       object-fit: cover;

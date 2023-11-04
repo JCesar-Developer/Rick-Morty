@@ -1,11 +1,11 @@
 import { ref } from 'vue';
 import Gender from '@/shared/interfaces/gender.enum';
-
+import { useParamsStore } from '@/stores/params.store';
 import type { Filter } from '@/shared/interfaces/filter.interface';
-import type { ICharactersParams } from '@/api/api';
 
-export default function useGenderHandler(params: ICharactersParams, emit: (event: 'search', params: ICharactersParams) => void) {
+export default function useGenderHandler( emit: (event: 'search') => void ) {
 
+  const paramsStore = useParamsStore();
   const activeGender = ref<number|undefined>(undefined);
   const genderHandler: Filter[] = [
     { id: 1, name: Gender.FEMALE, value: Gender.FEMALE },
@@ -14,21 +14,22 @@ export default function useGenderHandler(params: ICharactersParams, emit: (event
     { id: 4, name: Gender.UNKNOWN, value: Gender.UNKNOWN },
   ];
 
-  const emitGender = ( filter: Filter ) => {
+  const setGender = ( filter: Filter ) => {
     if ( deactivateGender( filter.id ) ) return;
 
     activeGender.value = filter.id;
-    params.page = 1;
-    params.gender = filter.value as Gender;
-    emit('search', params);
+    paramsStore.setPage(1);
+    paramsStore.setGender(filter.value as Gender)
+    emit('search');
   };
 
   const deactivateGender = ( filterId: number ): boolean => {
     if( activeGender.value == filterId ) {
       activeGender.value = undefined;
-      params.page = 1;
-      params.gender = undefined;
-      emit('search', params);
+      paramsStore.setPage(1);
+      paramsStore.setGender(undefined);
+      emit('search');
+
       return true;
     }
 
@@ -38,6 +39,6 @@ export default function useGenderHandler(params: ICharactersParams, emit: (event
   return {
     activeGender,
     genderHandler,
-    emitGender,
+    setGender,
   }
 }
