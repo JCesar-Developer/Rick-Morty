@@ -1,6 +1,6 @@
 <template>
   <div id="home-view">
-    <InfiniteScroll :stop-scroll="stopScroll" :loading="showScrollLoader" class="center py-5" @scroll-end="onScrollEnd">
+    <InfiniteScroll :stop-scroll="stopScrolling" :loading="showLoader" class="center py-5" @scroll-end="onScrollEnd">
       <div class="thin-container">
 
         <Header class="d-none"></Header>
@@ -25,22 +25,29 @@
 import Header from '@/views/components/header.component.vue';
 import Card from './components/card.component.vue';
 import InfiniteScroll from '@/shared/components/infinite-scroll.component.vue';
+import useScroll from './composables/useScroll.composable';
 
 import type { ICharacter } from '@/models/character.interface';
 import type { PropType } from 'vue';
+import { watch } from 'vue';
 
-  defineProps({
+  const props = defineProps({
     characters: { type: Array as PropType<ICharacter[]>, required: true },
-    stopScroll: { type: Boolean, required: false, default: false },
-    showScrollLoader: { type: Boolean, required: false, default: false }
   });
 
   const emit = defineEmits(['scroll-end']);
+  const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading, checkScrollStatus, noMorePages } = useScroll();
 
   const onScrollEnd = async () => {
+    if ( noMorePages() ) return;
+    showScrollLoading();
     emit('scroll-end');
   }
 
+  watch(() => props.characters, () => {
+    hideScrollLoading();
+    checkScrollStatus();
+  });
 </script>
 
 <style src="./home-view.scss" scoped lang="scss"></style>

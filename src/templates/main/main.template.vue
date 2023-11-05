@@ -27,11 +27,14 @@
         <template v-else>
           <!-- Home-view -->
           <template v-if="characters.length > 0">
-            <Home 
+            <!--<Home 
               @scroll-end="loadMore" 
               :characters="characters" 
               :stop-scroll="stopScrolling" 
-              :show-scroll-loader="showLoader"/>
+              :show-scroll-loader="showLoader"/>-->
+            <Home 
+              @scroll-end="loadMore" 
+              :characters="characters"/>
           </template>
 
           <!-- Not-found-view -->

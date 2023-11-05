@@ -7,12 +7,15 @@ export default function useScroll() {
   const showLoader = ref<boolean>(false);
 
   const showScrollLoading = () => {
+    console.log('showScrollLoading');
     showLoader.value = true;
   }
   const hideScrollLoading = () => {
+    console.log('hideScrollLoading');
     showLoader.value = false;
   }
   const checkScrollStatus = () => {
+    console.log('checkScrollStatus');
     stopScrolling.value = ( noMorePages() );
   };
   const noMorePages = () => {

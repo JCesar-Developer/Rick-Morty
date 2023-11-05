@@ -15,7 +15,6 @@ import { useParamsStore } from '@/stores/params.store';
 import { useSidebarStore } from '@/stores/sidebar.store';
 import useAlert from './composables/useAlert.composable';
 import useCharacters from './composables/useCharacters.composable';
-import useScroll from './composables/useScroll.composable';
 import useSwipe from './composables/useSwipe.composable';
 
 export default defineComponent({
@@ -31,9 +30,6 @@ export default defineComponent({
     const { alert, setAlertMessage, showAlert } = useAlert();
     const { startSwipe, swipe, endSwipe } = useSwipe();
 
-    //TODO: Puede salir de aquí
-    const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading, checkScrollStatus, noMorePages } = useScroll();
-
     /**
      * He decidido no encapsular los ciclos de vida principales en un webhook (composable function en vue),
      * principalmente para evitar uno de los principales smell-codes modernos en el desarrollo web front-end:
@@ -45,7 +41,6 @@ export default defineComponent({
     onBeforeMount(async () => {
       showLoadingScreen.value = true;
 
-      //webhock
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
@@ -77,7 +72,6 @@ export default defineComponent({
     const searchCharacters = async (closeSideBar?: boolean) => {
       showLoadingScreen.value = true;
 
-      //webhock
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
@@ -93,29 +87,17 @@ export default defineComponent({
           sideBarStore.deactivateSideBar();
         }
       }, 500);
-
-      //TODO: Puede salir de aquí
-      checkScrollStatus();
     };
 
     //ciclo principal
     const loadMore = async () => {
-      if ( noMorePages() ) return;
-
-      //TODO: Puede salir de aquí
-      showScrollLoading();
       paramsStore.increasePage(1);
 
-      //webhock
       await loadMoreCharacters( paramsStore.params )
-        .then( () => hideScrollLoading() )
         .catch( err => {
           setAlertMessage(err.toString());
           showAlert();
         });
-
-      //TODO: Puede salir de aquí
-      checkScrollStatus();
     };
 
     return {
@@ -123,10 +105,8 @@ export default defineComponent({
       characters,
       loadMore,
       searchCharacters,
-      showLoader,
       showLoadingScreen,
       sideBarStore,
-      stopScrolling,
       startSwipe,
       swipe,
       endSwipe,
