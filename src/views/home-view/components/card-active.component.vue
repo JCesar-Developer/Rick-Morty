@@ -159,7 +159,7 @@ import type { ICharacter } from '@/models/character.interface';
         @media (max-width:576px) {
           top: auto;
           left: auto;
-          min-width: auto;
+          min-width: 90%;
           min-height: auto;
           margin: 10px;
           box-sizing: border-box;

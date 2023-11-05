@@ -52,11 +52,20 @@ import type { ICharacter } from '@/models/character.interface';
     aspect-ratio: 1/1.25; 
   }
   @media( max-width: 400px ) {
-    aspect-ratio: 1/1.35; 
+    aspect-ratio: 1/1.45; 
   }
   @media (max-width: 690px) and (min-width: 576px){
     width: 100%;
-    aspect-ratio: 1/1.45; 
+    aspect-ratio: 1/1.4; 
+  }
+  //@media (max-width: 576px) {
+  //  aspect-ratio: 1/1.55; 
+  //}
+  @media (max-width: 400px) {
+    aspect-ratio: 1/1.50; 
+  }
+  @media (max-width: 360px) {
+    aspect-ratio: 1/2; 
   }
 }
 

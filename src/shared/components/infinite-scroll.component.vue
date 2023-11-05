@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Spinner from './spinner.component.vue';
+import { getViewportWidth } from '../helpers';
 
 const emit = defineEmits(['scroll-end'])
 const props = defineProps({ 
@@ -24,7 +25,13 @@ const handleScrollEnd = () => {
   const scrollPosition = scrollContainer.value.scrollTop;
   const viewportHeight = window.innerHeight;
 
-  if ((totalHeight - scrollPosition -2 <= viewportHeight) && !props.stopScroll ) {
+  if( getViewportWidth() < 400 ) {
+    if ((totalHeight - scrollPosition - 90 <= viewportHeight) && !props.stopScroll ) {
+      emit('scroll-end');
+    }
+  }
+
+  if ((totalHeight - scrollPosition - 1 <= viewportHeight) && !props.stopScroll ) {
     emit('scroll-end');
   }
 }
