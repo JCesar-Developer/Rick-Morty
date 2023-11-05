@@ -34,6 +34,13 @@ export default defineComponent({
     //TODO: Puede salir de aquí
     const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading, checkScrollStatus, noMorePages } = useScroll();
 
+    /**
+     * He decidido no encapsular los ciclos de vida principales en un webhook (composable function en vue),
+     * principalmente para evitar uno de los principales smell-codes modernos en el desarrollo web front-end:
+     * "TOO MUCH MAGIC", que es cuando el componente no expresa individualmente su comportamiento. Haciendo que,
+     * futuros desarrolladores, sean incapaces de entender de donde vienen las asignaciones de las variables. 
+     */
+
     //Ciclo principal
     onBeforeMount(async () => {
       showLoadingScreen.value = true;
@@ -61,6 +68,10 @@ export default defineComponent({
         sideBarStore.activateSideBar();
       }, 1500);
     }
+    
+    const getViewportWidth = (): number => {
+      return window.innerWidth;
+    };
 
     //ciclo principal
     const searchCharacters = async (closeSideBar?: boolean) => {
@@ -82,6 +93,8 @@ export default defineComponent({
           sideBarStore.deactivateSideBar();
         }
       }, 500);
+
+      //TODO: Puede salir de aquí
       checkScrollStatus();
     };
 
@@ -103,10 +116,6 @@ export default defineComponent({
 
       //TODO: Puede salir de aquí
       checkScrollStatus();
-    };
-
-    const getViewportWidth = (): number => {
-      return window.innerWidth;
     };
 
     return {

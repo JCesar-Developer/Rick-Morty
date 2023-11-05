@@ -1,0 +1,90 @@
+@import '@/assets/styles/colors.scss';
+
+//custom typo-utilities
+.sm-h3 {
+  @media (min-width: 576px) {
+    font-size: 28px;
+  }
+}
+
+//viewport
+#home-view {
+  position: relative;
+
+  #header {
+    @media (max-width: 992px) {
+      display: block !important;
+    }
+  }
+
+  #title {
+    @media (max-width: 992px) {
+      display: flex !important;
+      align-items: center;
+      width: 100%;
+      font-weight: 400 !important;
+
+      &::after {
+        content: "";
+        flex-grow: 1;
+        height: 2.5px;
+        border-radius: 1.5px;
+        background-color: $g-300;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .infinite-scroll {
+
+    @media (max-width: 575px) {
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+    }
+
+    .thin-container {
+      width: 900px;
+
+      @media (max-width: 1200px) and (min-width: 992px) {
+        width: 100%;
+        padding: 0 3rem !important;
+      }
+      @media (max-width: 992px) {
+        margin-top: 90px;
+        width: 900px;
+      }
+      @media (max-width: 900px) {
+        width: 100%;
+        padding: 0 2rem !important;
+      }
+
+      @media (max-width: 575px) {
+        margin-top: 80px;
+      }
+    }
+
+    //Special-card-behaviors
+    .thin-container {
+      @media (max-width: 990px) and (min-width: 690px) {
+        .row {
+          justify-content: space-between;
+          .col-6 {
+            width: auto;
+          }
+        }
+      }
+      @media (max-width: 680px) and (min-width: 576px){
+        .card { width: 100%; }
+      }
+      @media (max-width: 560px) and (min-width: 490px) {
+        .row {
+          justify-content: space-between;
+          .col-6 {
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
