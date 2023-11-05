@@ -1,6 +1,6 @@
 <template>
-  <div id="animated-card">
-    <div id="card-component" class="pointer card-animation" :class="gender" @click="activeCard()">
+  <div id="animated-card" class="pointer" @click="activeCard()">
+    <div id="card-component" class="card-animation" :class="gender">
       <div class="center w-100 gap-2">
         <!-- card-image -->
         <img :src="character.image" alt="profile image"/>

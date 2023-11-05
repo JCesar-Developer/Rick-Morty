@@ -1,5 +1,5 @@
-<template>
-  <input id="searchbar" type="text" placeholder="Encuentra un personaje" class="w-100" v-model="_search">
+w<template>
+  <input id="searchbar" type="text" placeholder="Find a character" class="w-100" v-model="_search">
 </template>
 
 <script setup lang="ts">

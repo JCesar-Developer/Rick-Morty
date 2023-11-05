@@ -16,10 +16,10 @@ export default function useSwipe( ){
     if (isSwapping.value) {
       const endPosition = event.touches[0].clientX;
       const deltaX: number = startPosition.value - endPosition;
-      if (deltaX > 20 && getViewportWidth() < 992 ) {
+      if (deltaX > 40 && getViewportWidth() < 992 ) {
         sideBarStore.deactivateSideBar();
         isSwapping.value = false;
-      } else if (deltaX < -20 && getViewportWidth() < 992 ) {
+      } else if (deltaX < -40 && getViewportWidth() < 992 ) {
         sideBarStore.activateSideBar();
         isSwapping.value = false;
       }
