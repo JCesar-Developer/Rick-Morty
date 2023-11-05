@@ -5,7 +5,7 @@
     <CollapseButton @click="sideBarStore.deactivateSideBar"/>
 
     <div id="side-bar-container" class="d-flex flex-column justify-content-center align-items-center p-0 m-0">
-      <div class="w-80">
+      <div class="w-100">
         <!-- Image -->
         <img src="@/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
         <!-- Logo -->
@@ -13,7 +13,7 @@
       </div>
       <!-- Filters -->
       <!-- filter-status -->
-      <div class="row w-80 justify-content-center gap-2">
+      <div class="row w-100 justify-content-center gap-2">
         <FilterButton v-for="status in statusHandler" :key="status.id" @click="setStatus(status)" :is-active="activeStatus == status.id">
           {{ status.name }}
         </FilterButton>

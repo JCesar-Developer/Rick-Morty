@@ -17,6 +17,9 @@ import useAlert from './composables/useAlert.composable';
 import useCharacters from './composables/useCharacters.composable';
 import useSwipe from './composables/useSwipe.composable';
 
+//Helpers
+import { getViewportWidth } from '@/shared/helpers';
+
 export default defineComponent({
 
   components: { Alert, SideBar, Loading, NotFound, Home, BlackCurtain },
@@ -28,7 +31,7 @@ export default defineComponent({
     const sideBarStore = useSidebarStore();
     const { characters, getCharacters, loadMoreCharacters } = useCharacters();
     const { alert, setAlertMessage, showAlert } = useAlert();
-    const { startSwipe, swipe, endSwipe } = useSwipe();
+    const { startSwipe, swipe, endSwipe } = useSwipe(  );
 
     /**
      * He decidido no encapsular los ciclos de vida principales en un webhook (composable function en vue),
@@ -64,9 +67,9 @@ export default defineComponent({
       }, 1500);
     }
     
-    const getViewportWidth = (): number => {
-      return window.innerWidth;
-    };
+    //const getViewportWidth = (): number => {
+    //  return window.innerWidth;
+    //};
 
     //ciclo principal
     const searchCharacters = async (closeSideBar?: boolean) => {

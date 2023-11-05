@@ -1,7 +1,8 @@
 import { ref } from 'vue';
 import { useSidebarStore } from '@/stores/sidebar.store';
+import { getViewportWidth } from '@/shared/helpers';
 
-export default function useSwipe(){
+export default function useSwipe( ){
   const isSwapping = ref<boolean>(false);
   const startPosition = ref<number>(0);
   const sideBarStore = useSidebarStore();
@@ -15,10 +16,10 @@ export default function useSwipe(){
     if (isSwapping.value) {
       const endPosition = event.touches[0].clientX;
       const deltaX: number = startPosition.value - endPosition;
-      if (deltaX > 20) {
+      if (deltaX > 20 && getViewportWidth() < 992 ) {
         sideBarStore.deactivateSideBar();
         isSwapping.value = false;
-      } else if (deltaX < -20) {
+      } else if (deltaX < -20 && getViewportWidth() < 992 ) {
         sideBarStore.activateSideBar();
         isSwapping.value = false;
       }
