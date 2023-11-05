@@ -61,19 +61,6 @@ export default defineComponent({
     });
 
     //ciclo principal
-    onMounted(() => {
-      autoActivateSideBar();
-    });
-
-    //sidebar-handler
-    const autoActivateSideBar = () => {
-      if ( getViewportWidth() > 992 ) return;
-      setTimeout(() => {
-        sideBarStore.activateSideBar();
-      }, 1500);
-    }
-    
-    //ciclo principal
     const searchCharacters = async () => {
       showLoadingScreen.value = true;
 
@@ -87,7 +74,6 @@ export default defineComponent({
           showAlert();
         });
 
-      //sidebar-handler TODO: Este código es una chapuza, pero me he quedado sin tiempo.
       setTimeout(() => {
         if( (getViewportWidth() < 576) && sideBarStore.isSideBarActive ) {
           sideBarStore.deactivateSideBar();
