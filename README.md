@@ -6,7 +6,7 @@ Desarrollado por: Julio César Asto Machuca.
 - Ver demo del proyecto: https://youtube.com/shorts/MJzEgMKVYl4
 
 
-La última publicación liberada del proyecto ha sido hecha el día Domingo 05 de noviembre a las 23:30. El mismo está publicado en la rama principal (main) del repositorio remoto de github. A partir de ese punto el proyecto quedará congelado hasta su futura evaluación. Futuras actualizaciones serán agregadas, luego del resultado de las pruebas.
+La última publicación liberada del proyecto ha sido hecha el día Domingo 05 de noviembre a las 23:30. El mismo está publicado en la rama principal (main) del repositorio remoto de github. A partir de ese punto el proyecto quedará completamente congelado hasta su futura evaluación, con el objetivo de ser un competidor justo en este desafío. Futuras actualizaciones serán publicadas, luego del resultado de las pruebas.
 
 - Último lanzamiento: https://jc-rick-and-morty.netlify.app/
 
