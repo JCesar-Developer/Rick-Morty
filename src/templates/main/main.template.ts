@@ -1,4 +1,4 @@
-import { defineComponent, ref, onBeforeMount, onMounted } from 'vue';
+import { defineComponent, ref, onBeforeMount } from 'vue';
 
 //Pages
 import NotFound from '@/views/not-found.view.vue';
