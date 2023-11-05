@@ -1,34 +1,33 @@
 <template>
 
-  <div id="side-bar-component" class="d-flex flex-column justify-content-center align-items-center" :class="{'active': sideBarStore.isOpen}">
+  <div id="side-bar-component" class="row justify-content-center m-0" :class="{'active': sideBarStore.isOpen}">
 
     <CollapseButton @click="sideBarStore.deactivateSideBar"/>
 
-    <div class="w-80">
-      <!-- Image -->
-      <img src="@/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
-      <!-- Logo -->
-      <img src="@/assets/images/logo.png" alt="Logo" class="w-100 my-2">
-    </div>
-
-    <!-- Filters -->
-    <!-- filter-status -->
-    <div class="row w-80 justify-content-center gap-2">
-      <FilterButton v-for="status in statusHandler" :key="status.id" @click="setStatus(status)" :is-active="activeStatus == status.id">
-        {{ status.name }}
-      </FilterButton>
-    </div>
-
-    <!-- filter-gender -->
-    <div class="row w-80 justify-content-center mt-5 gap-2">
-      <FilterButton v-for="gender in genderHandler" :key="gender.id" @click="setGender(gender)" :is-active="activeGender == gender.id">
-        {{ gender.name }}
-      </FilterButton>
-    </div>
-
-    <!-- Search-bar -->
-    <div class="w-80 mt-4">
-      <SearchBar @search="emit('search')"/>
+    <div id="side-bar-container" class="d-flex flex-column justify-content-center align-items-center p-0 m-0">
+      <div class="w-80">
+        <!-- Image -->
+        <img src="@/assets/images/space-cruiser.png" alt="Space Cruiser" class="w-100">
+        <!-- Logo -->
+        <img src="@/assets/images/logo.png" alt="Logo" class="w-100 my-2">
+      </div>
+      <!-- Filters -->
+      <!-- filter-status -->
+      <div class="row w-80 justify-content-center gap-2">
+        <FilterButton v-for="status in statusHandler" :key="status.id" @click="setStatus(status)" :is-active="activeStatus == status.id">
+          {{ status.name }}
+        </FilterButton>
+      </div>
+      <!-- filter-gender -->
+      <div class="row w-80 justify-content-center mt-5 gap-2">
+        <FilterButton v-for="gender in genderHandler" :key="gender.id" @click="setGender(gender)" :is-active="activeGender == gender.id">
+          {{ gender.name }}
+        </FilterButton>
+      </div>
+      <!-- Search-bar -->
+      <div class="w-80 mt-4">
+        <SearchBar @search="emit('search')"/>
+      </div>
     </div>
   </div>
 </template>

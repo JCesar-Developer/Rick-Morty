@@ -22,6 +22,11 @@
       left: 0;
     }
   }
+  @media (max-width: 575px) {
+    width: 100%;
+    max-width: 575px;
+    left: -575px;
+  }
 
   #collapse-button {
     position: absolute;
@@ -33,5 +38,9 @@
     @media (max-width: 992px) {
       display: flex;
     }
+  }
+
+  #side-bar-container {
+    max-width: 340px;
   }
 }
