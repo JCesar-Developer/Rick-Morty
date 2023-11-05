@@ -69,22 +69,16 @@
       @media (max-width: 990px) and (min-width: 690px) {
         .row {
           justify-content: space-between;
-          .col-6 {
-            width: auto;
-          }
         }
       }
-      @media (max-width: 680px) and (min-width: 576px){
-        .card { width: 100%; }
-      }
-      @media (max-width: 560px) and (min-width: 490px) {
-        .row {
-          justify-content: space-between;
-          .col-6 {
-            width: auto;
-          }
-        }
-      }
+      //@media (max-width: 560px) and (min-width: 490px) {
+      //  .row {
+      //    //justify-content: space-between;
+      //    //.col-6 {
+      //    //  width: auto;
+      //    //}
+      //  }
+      //}
     }
   }
 }

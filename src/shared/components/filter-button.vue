@@ -22,8 +22,11 @@ button {
   transition: all .3s ease-in-out;
 
   &.active {
+    background-color: $g-100;
     border: solid 2px transparent;
     box-shadow: 0px 0px 10px 2px $g-500;  
+    color: $t-black;
+    font-weight:900;
   }
 }
 </style>

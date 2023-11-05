@@ -30,8 +30,8 @@ header {
   left: 0;
   height: 100px;
   padding: 15px 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  box-shadow: rgba(0, 0, 0, 0.6) 0px 8px 15px;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: rgba(0, 0, 0) 0px 8px 15px;
 
   @media (max-width: 576px) {
     height: 90px;

@@ -50,4 +50,4 @@ import { watch } from 'vue';
   });
 </script>
 
-<style src="./home-view.scss" scoped lang="scss"></style>
+<style src="./home.view.scss" scoped lang="scss"></style>
