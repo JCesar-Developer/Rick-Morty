@@ -1,48 +1,5 @@
-<template>
-  <div id="animated-card" class="pointer" @click="activeCard()">
-    <div id="card-component" class="card-animation" :class="gender">
-      <div class="center w-100 gap-2">
-        <!-- card-image -->
-        <img :src="character.image" alt="profile image"/>
-        <!-- card-description -->
-        <div class="text-center">
-          <div class="paragraph-1 bold mb-2">
-            <span id="status" :class="status">{{ character.name }}</span>
-          </div>
-          <p class="paragraph-3 light">Specie: {{ character.species }}</p>
-          <p class="paragraph-3">Origin: {{ character.origin.name }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <CardActive class="pointer" :character="character" :active="active" @click="deactiveCard()"/>
-
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import CardActive from './card-active.component.vue'
-import type { ICharacter } from '@/models/character.interface';
-
-  const props = defineProps({
-    character: { type: Object as () => ICharacter, required: true }
-  })
-
-  const active = ref<boolean>(false);
-  const status = ref<string>( props.character.status );
-  const gender = ref<string>( props.character.gender );
-
-  const activeCard = () => {
-    active.value = true;
-  }
-  const deactiveCard = () => {
-    active.value = false;
-  }
-</script>
-
-<style scoped lang="scss">
 @import '@/assets/styles/colors.scss';
+
 #animated-card {
   width: 200px;
   aspect-ratio: 1/1.15;
@@ -58,14 +15,11 @@ import type { ICharacter } from '@/models/character.interface';
     width: 100%;
     aspect-ratio: 1/1.4; 
   }
-  //@media (max-width: 576px) {
-  //  aspect-ratio: 1/1.55; 
-  //}
   @media (max-width: 400px) {
     aspect-ratio: 1/1.50; 
   }
   @media (max-width: 360px) {
-    aspect-ratio: 1/2; 
+    aspect-ratio: 1/1.9; 
   }
 }
 
@@ -139,4 +93,12 @@ import type { ICharacter } from '@/models/character.interface';
     }
 }
 
-</style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

@@ -11,7 +11,6 @@
   <BlackCurtain :class="{'is-active': sideBarStore.isOpen}" @click="sideBarStore.deactivateSideBar"/>
 
   <!-- MAIN-TEMPLATE -->
-  <!-- TODO: Aquí había un BG-700 y se veía bien -->
   <div id="main-template" class="d-flex min-vh-100 flex-column flex-lg-row m-0" @touchstart="startSwipe" @touchmove="swipe" @touchend="endSwipe">
 
     <!-- Aside -->

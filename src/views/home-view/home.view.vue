@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import Header from '@/views/components/header.component.vue';
-import Card from './components/card.component.vue';
+import Card from './components/card-component/card.component.vue';
 import InfiniteScroll from '@/shared/components/infinite-scroll.component.vue';
 import useScroll from './composables/useScroll.composable';
 

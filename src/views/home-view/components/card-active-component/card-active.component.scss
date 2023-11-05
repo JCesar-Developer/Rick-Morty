@@ -1,0 +1,116 @@
+@import '@/assets/styles/colors.scss';
+
+.first-state {
+  @media(min-width: 576px) {
+    max-width: 40px !important;
+    letter-spacing: -7px;
+    transition: max-width .5s ease-in-out, letter-spacing .3s ease-in-out;
+  }
+}
+.active-state {
+  @media(min-width: 576px) {
+    max-width: 1500px !important;
+    letter-spacing: 0px;
+    transform-origin: center;
+  }
+}
+
+#card-active-curtain {
+  //global-black-curtain
+  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+
+  //display
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  #card-active {
+    position: relative;
+    right: -58px;
+    border-radius: 20px;
+    border: solid 3px $g-300;
+    border-left: none;
+    height: 200px;
+    overflow: visible;
+    box-shadow: 0px 0px 40px 2px $g-500;  
+
+    @media (max-width:576px) {
+      display: flex;
+      flex-direction: column;
+      right: 0px;
+      top: 0px;
+      height: max-content;
+      box-sizing: content-box;
+      border: solid 7px $g-300;
+    }
+
+    &.Male {
+      background-color: $male;
+    }
+    &.Female {
+      background-color: $female;
+    }
+    &.Genderless {
+      background-color: $genderless;
+    }
+    &.unknown {
+      background-color: $gender-unknown;
+    }
+
+    #img-container{
+      @media (max-width: 576px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+      }
+      img {
+        position: relative;
+        box-sizing: content-box;
+        top: -32px;
+        left: -116px;
+        min-width: 250px;
+        min-height: 250px;
+        border: solid 8px $g-300;
+        object-position: center;
+        border-radius: 50%;
+        box-shadow: 0px 0px 200px 2px $g-300;  
+
+
+        @media (max-width:576px) {
+          top: auto;
+          left: auto;
+          min-width: 90%;
+          min-height: auto;
+          margin: 10px;
+          box-sizing: border-box;
+          border: solid 3px $g-300;
+          border-radius: 20px;
+          box-shadow: none; 
+        }
+      }
+    }
+
+    #description-container {
+      height: 194px;
+      p { line-height: 160%; }
+
+      @media (max-width:576px) {
+        height: max-content;
+        margin-bottom: 20px;
+        padding: 0 20px;
+        #title { margin-bottom: 10px; }
+      }
+    }
+  
+  }
+}
