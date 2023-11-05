@@ -29,12 +29,16 @@ export default defineComponent({
     const sideBarStore = useSidebarStore();
     const { characters, getCharacters, loadMoreCharacters } = useCharacters();
     const { alert, setAlertMessage, showAlert } = useAlert();
-    const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading, checkScrollStatus, noMorePages } = useScroll();
     const { startSwipe, swipe, endSwipe } = useSwipe();
 
+    //TODO: Puede salir de aquí
+    const { stopScrolling, showLoader, showScrollLoading, hideScrollLoading, checkScrollStatus, noMorePages } = useScroll();
+
+    //Ciclo principal
     onBeforeMount(async () => {
       showLoadingScreen.value = true;
 
+      //webhock
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
@@ -45,10 +49,12 @@ export default defineComponent({
       showLoadingScreen.value = false;
     });
 
+    //ciclo principal
     onMounted(() => {
       autoActivateSideBar();
     });
 
+    //sidebar-handler
     const autoActivateSideBar = () => {
       if ( getViewportWidth() > 992 ) return;
       setTimeout(() => {
@@ -56,9 +62,11 @@ export default defineComponent({
       }, 1500);
     }
 
+    //ciclo principal
     const searchCharacters = async (closeSideBar?: boolean) => {
       showLoadingScreen.value = true;
 
+      //webhock
       await getCharacters( paramsStore.params )
         .then( tPages => paramsStore.setTotalPages( tPages ) )
         .catch( err => {
@@ -68,6 +76,8 @@ export default defineComponent({
 
       setTimeout(() => {
         showLoadingScreen.value = false;
+
+        //sidebar-handler
         if( closeSideBar && sideBarStore.isSideBarActive ) {
           sideBarStore.deactivateSideBar();
         }
@@ -75,12 +85,15 @@ export default defineComponent({
       checkScrollStatus();
     };
 
+    //ciclo principal
     const loadMore = async () => {
       if ( noMorePages() ) return;
 
+      //TODO: Puede salir de aquí
       showScrollLoading();
       paramsStore.increasePage(1);
 
+      //webhock
       await loadMoreCharacters( paramsStore.params )
         .then( () => hideScrollLoading() )
         .catch( err => {
@@ -88,6 +101,7 @@ export default defineComponent({
           showAlert();
         });
 
+      //TODO: Puede salir de aquí
       checkScrollStatus();
     };
 
