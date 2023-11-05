@@ -23,6 +23,7 @@ import Header from '@/views/components/header.component.vue';
   }
 
   #not-found-container {
+    max-width: 350px;
     width: 40%;
 
     @media (max-width: 992px) {

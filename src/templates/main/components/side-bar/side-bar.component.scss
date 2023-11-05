@@ -4,6 +4,11 @@
 .w-80 {
   width: 80% !important;
 }
+.w-sm-80 {
+  @media (max-width: 576px) {
+    width: 80% !important;
+  }
+}
 
 //Viewport
 #side-bar-component {

@@ -6,7 +6,7 @@
         <Header class="d-none"></Header>
 
         <div id="title" class="h5 sm-h3 bolder mb-5 d-none">
-          Lista de personajes
+          Character list
         </div>
 
         <!-- Card-component -->

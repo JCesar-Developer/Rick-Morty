@@ -1,5 +1,5 @@
 <template>
-  <button class="col-5 paragraph-2 pointer" :class="{ 'active': isActive }">
+  <button class="paragraph-2 pointer" :class="{ 'active': isActive }">
     <slot></slot>
   </button>
 </template>

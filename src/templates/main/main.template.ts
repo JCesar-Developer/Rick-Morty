@@ -17,6 +17,9 @@ import useAlert from './composables/useAlert.composable';
 import useCharacters from './composables/useCharacters.composable';
 import useSwipe from './composables/useSwipe.composable';
 
+//types
+import type { resultToReturn } from './composables/useCharacters.composable';
+
 //Helpers
 import { getViewportWidth } from '@/shared/helpers';
 
@@ -45,7 +48,10 @@ export default defineComponent({
       showLoadingScreen.value = true;
 
       await getCharacters( paramsStore.params )
-        .then( tPages => paramsStore.setTotalPages( tPages ) )
+        .then( (resoult: resultToReturn) => {
+          paramsStore.setTotalPages( resoult.totalPages );
+          sideBarStore.setTotalResults( resoult.totalResults );
+        })
         .catch( err => {
           setAlertMessage(err.toString());
           showAlert();
@@ -67,28 +73,29 @@ export default defineComponent({
       }, 1500);
     }
     
-    //const getViewportWidth = (): number => {
-    //  return window.innerWidth;
-    //};
-
     //ciclo principal
-    const searchCharacters = async (closeSideBar?: boolean) => {
+    const searchCharacters = async () => {
       showLoadingScreen.value = true;
 
       await getCharacters( paramsStore.params )
-        .then( tPages => paramsStore.setTotalPages( tPages ) )
+        .then( (resoult: resultToReturn) => {
+          paramsStore.setTotalPages( resoult.totalPages );
+          sideBarStore.setTotalResults( resoult.totalResults );
+        })
         .catch( err => {
           setAlertMessage(err.toString());
           showAlert();
         });
 
+      //sidebar-handler TODO: Este código es una chapuza, pero me he quedado sin tiempo.
       setTimeout(() => {
-        showLoadingScreen.value = false;
-
-        //sidebar-handler
-        if( closeSideBar && sideBarStore.isSideBarActive ) {
+        if( (getViewportWidth() < 576) && sideBarStore.isSideBarActive ) {
           sideBarStore.deactivateSideBar();
         }
+  
+        setTimeout(() => {
+          showLoadingScreen.value = false;
+        }, 500);
       }, 500);
     };
 

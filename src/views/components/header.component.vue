@@ -11,6 +11,7 @@
       <div id="nav-btn" @click="sideBarStore.activateSideBar">
         <img id="cruiser" src="@/assets/images/space-cruiser.png" alt="cruiser">
         <img id="portal" src="@/assets/images/portal.png" alt="portal">
+        <span id="text-menu">menu</span>
       </div>
 
     </div>
@@ -67,6 +68,18 @@ header {
       left: -5px;
       padding: 0 0 0 10px;
       transform: rotateY(180deg);
+    }
+
+    #text-menu {
+      position: absolute;
+      bottom: .8px;
+      right: 15px;
+      font-size: .75rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.06rem;
+      text-shadow: 0 0 5px #fff;
     }
   }
 }
